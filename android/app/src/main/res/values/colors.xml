@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="plan_background">#F5F5F7</color>
+    <color name="plan_surface">#FFFFFF</color>
+    <color name="plan_text">#1D1D1F</color>
+    <color name="plan_muted">#6E6E73</color>
+    <color name="plan_accent">#3F3F46</color>
+    <color name="plan_line">#E3E3E6</color>
+    <color name="plan_danger">#BE1A22</color>
+</resources>

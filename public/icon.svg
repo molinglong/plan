@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Plan">
+  <rect width="512" height="512" fill="#1C1C1E"/>
+  <line x1="150" y1="96" x2="150" y2="416" stroke="#FFFFFF" stroke-opacity="0.26" stroke-width="10" stroke-linecap="round"/>
+  <rect x="190" y="110" width="184" height="70" rx="18" fill="#FFFFFF"/>
+  <rect x="190" y="222" width="132" height="70" rx="18" fill="#FFFFFF" fill-opacity="0.72"/>
+  <rect x="190" y="334" width="160" height="70" rx="18" fill="#FFFFFF" fill-opacity="0.42"/>
+</svg>

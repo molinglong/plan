@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 与 aichatt 同一套配色变量：macOS 极简黑白灰 */
+:root {
+  --font-sans: 'PingFang SC', 'Microsoft YaHei UI', -apple-system,
+    BlinkMacSystemFont, sans-serif;
+
+  --background: 245 245 247;
+  --foreground: 29 29 31;
+
+  --surface: 255 255 255;
+  --surface-muted: 245 245 247;
+  --surface-subtle: 233 233 236;
+
+  --line: 227 227 230;
+  --line-strong: 201 201 206;
+
+  --content-primary: 29 29 31;
+  --content-secondary: 110 110 115;
+  --content-muted: 152 152 157;
+
+  --accent: 63 63 70;
+  --accent-hover: 39 39 42;
+  --accent-foreground: 255 255 255;
+  --accent-soft: 236 236 238;
+
+  --note-paper: 255 246 201;
+  --note-edge: 235 217 140;
+  --note-ink: 63 58 30;
+  --note-sub: 126 116 66;
+
+  --danger: 190 26 34;
+  --danger-soft: 254 233 234;
+
+  --motion-fast: 180ms;
+  --motion-base: 260ms;
+  --motion-slow: 420ms;
+  --ease: cubic-bezier(0.32, 0.72, 0.28, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark {
+  --background: 12 12 13;
+  --foreground: 245 245 247;
+
+  --surface: 28 28 30;
+  --surface-muted: 38 38 40;
+  --surface-subtle: 51 51 54;
+
+  --line: 57 57 60;
+  --line-strong: 74 74 78;
+
+  --content-primary: 245 245 247;
+  --content-secondary: 160 160 168;
+  --content-muted: 112 112 122;
+
+  --accent: 212 212 216;
+  --accent-hover: 228 228 231;
+  --accent-foreground: 28 28 30;
+  --accent-soft: 51 51 54;
+
+  --note-paper: 59 53 32;
+  --note-edge: 85 76 43;
+  --note-ink: 243 238 220;
+  --note-sub: 180 171 134;
+
+  --danger: 248 113 113;
+  --danger-soft: 61 20 24;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-background font-sans text-content-primary antialiased;
+  overscroll-behavior: none;
+}
+
+/* 细滚动条，桌面端不抢视觉 */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--line-strong) / 0.6) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgb(var(--line-strong) / 0.6);
+  border-radius: 999px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 触控区最小值：手机端按钮 ≥44px 由组件控制，这里只兜底 */
+button {
+  touch-action: manipulation;
+}
+
+/* 时间轴比例：手机 56px/小时，桌面 64px/小时 */
+.timeline {
+  --hour: 56px;
+}
+@media (min-width: 1024px) {
+  .timeline {
+    --hour: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

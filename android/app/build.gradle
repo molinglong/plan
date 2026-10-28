@@ -1,0 +1,74 @@
+import java.util.Properties
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+def planVersionName = (findProperty('planVersionName') ?: '1.0.0').toString()
+def planVersionCode = (findProperty('planVersionCode') ?: '1').toString().toInteger()
+
+// 复用 aichatt 的 release keystore；路径与密码不落仓库
+def releaseSigning = new Properties()
+def secretsFile = file(System.getenv('PLAN_KEYSTORE_PROPERTIES') ?: 'D:/aichatt-secrets/keystore.properties')
+if (secretsFile.exists()) {
+    secretsFile.withInputStream { releaseSigning.load(it) }
+}
+def releaseSigningReady = releaseSigning.getProperty('storeFile') != null
+if (!releaseSigningReady && gradle.startParameter.taskNames.any { it.contains('Release', ignoreCase = true) }) {
+    throw new GradleException(
+        'Release signing config missing: expected D:/aichatt-secrets/keystore.properties ' +
+        'or PLAN_KEYSTORE_PROPERTIES.'
+    )
+}
+
+android {
+    namespace 'icu.yuban.plan'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'icu.yuban.plan'
+        minSdk 24
+        targetSdk 34
+        versionCode planVersionCode
+        versionName planVersionName
+    }
+
+    signingConfigs {
+        if (releaseSigningReady) {
+            release {
+                storeFile = file(releaseSigning.getProperty('storeFile'))
+                storePassword = releaseSigning.getProperty('storePassword')
+                keyAlias = releaseSigning.getProperty('keyAlias')
+                keyPassword = releaseSigning.getProperty('keyPassword')
+                enableV1Signing = false
+                enableV2Signing = true
+                enableV3Signing = true
+                enableV4Signing = false
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            signingConfig = signingConfigs.findByName('release')
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+}

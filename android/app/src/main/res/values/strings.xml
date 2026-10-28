@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Plan</string>
+    <string name="error_title">连不上 Plan</string>
+    <string name="error_desc">检查网络后重试；登录页可以点「aichatt 授权登录」。</string>
+    <string name="retry">重试</string>
+    <string name="auth_with_aichatt">aichatt 授权登录</string>
+    <string name="auth_in_progress">授权中…</string>
+</resources>
